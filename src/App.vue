@@ -8,12 +8,12 @@ const store = useUserStore()
 
 <template>
   <div class="min-h-screen bg-background text-foreground">
-    <header class="border-b">
+    <header class="border-b sticky top-0 bg-white dark:bg-gray-900">
       <nav class="container mx-auto px-4 py-4">
         <div class="flex justify-between items-center">
           <div class="flex items-center space-x-4">
             <img alt="Vue logo" class="h-8 w-8" src="@/assets/logo.svg" />
-            <span class="text-xl font-semibold">My App</span>
+            <span class="text-xl font-semibold">Sistem Penjualan</span>
           </div>
           <div class="space-x-4">
             <RouterLink v-if="!store.token" to="/" class="text-sm font-medium hover:underline">Login</RouterLink>
@@ -24,7 +24,7 @@ const store = useUserStore()
       </nav>
     </header>
 
-    <main class="container mx-auto px-4 py-8">
+    <main class="container mx-auto px-4 py-8 min-h-screen">
       <RouterView />
     </main>
 
