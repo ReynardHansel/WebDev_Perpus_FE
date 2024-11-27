@@ -11,7 +11,7 @@ import { ArrowRightIcon } from 'lucide-vue-next'
 axios.defaults.withCredentials = true
 axios.defaults.withXSRFToken = true
 
-const theRouter = useRouter()
+const router = useRouter()
 const auth = ref(null)
 const username = ref('')
 const password = ref('')
@@ -29,20 +29,22 @@ const bodyParameters = computed(() => {
 })
 
 function login() {
-  axios({
-    url: 'http://localhost/perpus/public/api/login',
-    method: 'POST',
-    headers: customConfig,
-    data: bodyParameters.value,
-  })
+  console.log('Data being sent to backend:', bodyParameters.value)
+
+  axios
+    .post('http://127.0.0.1:8000/api/login', bodyParameters.value, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
     .then((response) => {
       auth.value = response.data
       console.log(response.data)
       if (auth.value.success === true) {
-        store.email = username.value
-        store.token = auth.value.data
-        store.theCounter++
-        theRouter.push('/menu')
+        store.setEmail(username.value)
+        store.setToken(auth.value.data)
+        store.incrementCounter()
+        router.push('/menu')
       }
     })
     .catch((error) => {
@@ -95,14 +97,8 @@ function login() {
 
       <div class="mt-6 text-center text-sm">
         <span class="text-gray-600">Don't have an account? </span>
-        <RouterLink to="/#" class="text-[#4F46E5] hover:underline">Register</RouterLink>
+        <RouterLink to="/register" class="text-[#4F46E5] hover:underline">Register</RouterLink>
       </div>
     </Card>
   </div>
 </template>
-
-<style scoped>
-:deep(.input) {
-  background-color: #fefce8;
-}
-</style>

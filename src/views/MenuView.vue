@@ -53,6 +53,12 @@ function logout() {
           <p class="text-muted-foreground">Manage inventory items</p>
         </Card>
       </RouterLink>
+      <RouterLink to="/users">
+        <Card class="p-6 hover:bg-accent hover:text-accent-foreground transition-colors">
+          <h3 class="text-2xl font-semibold mb-2">Users</h3>
+          <p class="text-muted-foreground">Manage user accounts</p>
+        </Card>
+      </RouterLink>
     </div>
     <div class="flex justify-between items-center">
       <p class="text-lg">Counter: {{ theCounter }}</p>

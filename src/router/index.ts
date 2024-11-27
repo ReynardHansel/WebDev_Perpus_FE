@@ -4,7 +4,8 @@ import MenuView from '@/views/MenuView.vue'
 import Login from '@/views/Login.vue'
 import PegawaiView from '@/views/PegawaiView.vue'
 import BarangView from '@/views/BarangView.vue'
-import { useUserStore } from '@/stores/counter'
+// import { useUserStore } from '@/stores/counter'
+import UserManagement from '@/views/UserManagement.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,6 +14,11 @@ const router = createRouter({
       path: '/',
       name: 'login',
       component: Login,
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: () => import('../views/AboutView.vue'),
     },
     {
       path: '/menu',
@@ -33,10 +39,11 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue'),
-    },
+      path: '/users',
+      name: 'users',
+      component: UserManagement,
+      meta: { requiresAuth: true },
+    }
   ],
 })
 
